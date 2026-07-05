@@ -14,7 +14,7 @@ export function ScorePicker({ defaultValue = 3 }: { defaultValue?: number }) {
           key={n}
           type="button"
           onClick={() => setScore(n)}
-          aria-label={`${n} grapes`}
+          aria-label={`${n} cachos de uva`}
           className="p-1"
         >
           <GrapeCluster filled={n <= score} size={26} />

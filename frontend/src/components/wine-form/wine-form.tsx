@@ -32,34 +32,34 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
       )}
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg text-foreground">Identity</h2>
+        <h2 className="font-display text-lg text-foreground">Identidade</h2>
         <div>
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">Nome</Label>
           <Input id="name" name="name" required defaultValue={initialValues?.name} />
           <FieldError messages={errors.name} />
         </div>
         <div>
-          <Label htmlFor="winery">Winery</Label>
+          <Label htmlFor="winery">Vinícola</Label>
           <Input id="winery" name="winery" required defaultValue={initialValues?.winery} />
           <FieldError messages={errors.winery} />
         </div>
         <div className="flex gap-3">
           <div className="flex-1">
-            <Label htmlFor="year">Year</Label>
+            <Label htmlFor="year">Ano</Label>
             <Input
               id="year"
               name="year"
               type="number"
-              placeholder="NV"
+              placeholder="Sem safra"
               defaultValue={initialValues?.year ?? undefined}
             />
             <FieldError messages={errors.year} />
           </div>
           <div className="flex-1">
-            <Label htmlFor="type">Type</Label>
+            <Label htmlFor="type">Tipo</Label>
             <Select id="type" name="type" required defaultValue={initialValues?.type ?? ""}>
               <option value="" disabled>
-                Select…
+                Selecione…
               </option>
               {WINE_TYPES.map((t) => (
                 <option key={t} value={t}>
@@ -72,12 +72,12 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
         </div>
         <div className="flex gap-3">
           <div className="flex-1">
-            <Label htmlFor="grape">Grape</Label>
+            <Label htmlFor="grape">Uva</Label>
             <Input id="grape" name="grape" required defaultValue={initialValues?.grape} />
             <FieldError messages={errors.grape} />
           </div>
           <div className="flex-1">
-            <Label htmlFor="grapeOrigin">Grape origin</Label>
+            <Label htmlFor="grapeOrigin">Origem da uva</Label>
             <Input
               id="grapeOrigin"
               name="grapeOrigin"
@@ -90,26 +90,26 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
       </section>
 
       <section className="space-y-4">
-        <h2 className="font-display text-lg text-foreground">Tasting</h2>
+        <h2 className="font-display text-lg text-foreground">Degustação</h2>
         <div>
-          <Label>Score</Label>
+          <Label>Nota</Label>
           <ScorePicker defaultValue={initialValues?.score ?? 3} />
           <FieldError messages={errors.score} />
         </div>
         <div className="flex gap-3">
           <div className="flex-1">
-            <Label htmlFor="whereTried">Where tried</Label>
+            <Label htmlFor="whereTried">Onde bebemos</Label>
             <Input
               id="whereTried"
               name="whereTried"
               required
-              placeholder="Home, Restaurant X…"
+              placeholder="Casa, Restaurante X…"
               defaultValue={initialValues?.whereTried}
             />
             <FieldError messages={errors.whereTried} />
           </div>
           <div className="flex-1">
-            <Label htmlFor="citySippedIn">City</Label>
+            <Label htmlFor="citySippedIn">Cidade</Label>
             <Input
               id="citySippedIn"
               name="citySippedIn"
@@ -119,7 +119,7 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
           </div>
         </div>
         <div>
-          <Label htmlFor="whenTried">Date tried</Label>
+          <Label htmlFor="whenTried">Data</Label>
           <Input
             id="whenTried"
             name="whenTried"
@@ -129,7 +129,7 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
           <FieldError messages={errors.whenTried} />
         </div>
         <div>
-          <Label htmlFor="personalFeels">Personal notes</Label>
+          <Label htmlFor="personalFeels">Notas pessoais</Label>
           <Textarea
             id="personalFeels"
             name="personalFeels"
@@ -139,7 +139,7 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
           <FieldError messages={errors.personalFeels} />
         </div>
         <div>
-          <Label htmlFor="notes">Additional notes</Label>
+          <Label htmlFor="notes">Notas adicionais</Label>
           <Textarea id="notes" name="notes" defaultValue={initialValues?.notes ?? undefined} />
           <FieldError messages={errors.notes} />
         </div>
@@ -148,11 +148,11 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
       <section className="space-y-4">
         <h2 className="font-display text-lg text-foreground">Extra</h2>
         <div>
-          <Label htmlFor="photo">Bottle photo</Label>
+          <Label htmlFor="photo">Foto da garrafa</Label>
           <PhotoUpload name="bottlePhotoUrl" defaultUrl={initialValues?.bottlePhotoUrl} />
         </div>
         <div>
-          <Label htmlFor="descriptionByAi">AI description</Label>
+          <Label htmlFor="descriptionByAi">Descrição gerada por IA</Label>
           <Textarea
             id="descriptionByAi"
             name="descriptionByAi"
@@ -162,7 +162,7 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
         </div>
         <div className="flex gap-3">
           <div className="flex-1">
-            <Label htmlFor="price">Price (BRL)</Label>
+            <Label htmlFor="price">Preço (R$)</Label>
             <Input
               id="price"
               name="price"
@@ -173,7 +173,7 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
             <FieldError messages={errors.price} />
           </div>
           <div className="flex-1">
-            <Label htmlFor="purchaseLocation">Purchase location</Label>
+            <Label htmlFor="purchaseLocation">Local de compra</Label>
             <Input
               id="purchaseLocation"
               name="purchaseLocation"
@@ -185,7 +185,7 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
       </section>
 
       <Button type="submit" disabled={pending} className="w-full">
-        {pending ? "Saving…" : submitLabel}
+        {pending ? "Salvando…" : submitLabel}
       </Button>
     </form>
   );

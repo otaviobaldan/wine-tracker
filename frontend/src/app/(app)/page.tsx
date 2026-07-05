@@ -30,7 +30,9 @@ export default async function WineListPage({ searchParams }: WineListPageProps) 
 
       {wines.length === 0 ? (
         <p className="py-12 text-center text-sm text-muted">
-          {q || type || minScore ? "No wines match those filters." : "No wines logged yet."}
+          {q || type || minScore
+            ? "Nenhum vinho corresponde a esses filtros."
+            : "Nenhum vinho registrado ainda."}
         </p>
       ) : (
         <ul className="space-y-2">
@@ -44,7 +46,7 @@ export default async function WineListPage({ searchParams }: WineListPageProps) 
 
       <Link
         href="/wines/new"
-        aria-label="Add a wine"
+        aria-label="Adicionar vinho"
         className="fixed bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-accent-foreground shadow-lg hover:bg-accent/90"
       >
         <Plus size={24} />

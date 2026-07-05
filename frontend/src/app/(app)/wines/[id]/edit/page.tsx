@@ -23,11 +23,11 @@ export default async function EditWinePage({ params }: EditWinePageProps) {
 
   return (
     <div>
-      <h1 className="mb-6 font-display text-2xl text-foreground">Edit wine</h1>
+      <h1 className="mb-6 font-display text-2xl text-foreground">Editar vinho</h1>
       <WineForm
         action={updateWineAction.bind(null, id)}
         initialValues={wine}
-        submitLabel="Save changes"
+        submitLabel="Salvar alterações"
       />
     </div>
   );

@@ -19,7 +19,7 @@ export function LogoutButton() {
     <button
       onClick={handleLogout}
       disabled={pending}
-      aria-label="Log out"
+      aria-label="Sair"
       className="rounded-lg p-2 text-muted hover:bg-surface-hover hover:text-foreground disabled:opacity-50"
     >
       <LogOut size={18} />

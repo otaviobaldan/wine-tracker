@@ -16,7 +16,7 @@ const dmSerif = DM_Serif_Display({
 
 export const metadata: Metadata = {
   title: "Wine Tracker",
-  description: "A private log of wines we've enjoyed together.",
+  description: "Um registro privado dos vinhos que já provamos juntos.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -44,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${dmSerif.variable} h-full`}>
+    <html lang="pt-BR" className={`${dmSans.variable} ${dmSerif.variable} h-full`}>
       <body className="min-h-full font-sans antialiased">
         {children}
         <ServiceWorkerRegistration />

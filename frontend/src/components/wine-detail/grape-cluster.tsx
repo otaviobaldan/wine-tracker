@@ -30,7 +30,7 @@ interface ScoreDisplayProps {
 
 export function ScoreDisplay({ score, size = 16 }: ScoreDisplayProps) {
   return (
-    <div className="flex items-center gap-1" role="img" aria-label={`Score: ${score} out of 5`}>
+    <div className="flex items-center gap-1" role="img" aria-label={`Nota: ${score} de 5`}>
       {[1, 2, 3, 4, 5].map((n) => (
         <GrapeCluster key={n} filled={n <= score} size={size} />
       ))}

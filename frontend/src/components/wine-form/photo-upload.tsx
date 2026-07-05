@@ -52,7 +52,7 @@ export function PhotoUpload({ name, defaultUrl }: PhotoUploadProps) {
       const data = await res.json();
       setUrl(data.url);
     } catch {
-      setError("Couldn't upload that photo. Try again.");
+      setError("Não foi possível enviar a foto. Tente novamente.");
     } finally {
       setUploading(false);
       event.target.value = "";
@@ -64,7 +64,7 @@ export function PhotoUpload({ name, defaultUrl }: PhotoUploadProps) {
       <input type="hidden" name={name} value={url} />
       {url ? (
         // eslint-disable-next-line @next/next/no-img-element -- arbitrary Blob URLs, not worth next/image remotePatterns config
-        <img src={url} alt="Bottle label" className="mb-2 h-40 w-32 rounded-lg object-cover" />
+        <img src={url} alt="Rótulo da garrafa" className="mb-2 h-40 w-32 rounded-lg object-cover" />
       ) : null}
       <button
         type="button"
@@ -73,7 +73,7 @@ export function PhotoUpload({ name, defaultUrl }: PhotoUploadProps) {
         className="flex items-center gap-2 rounded-lg border border-border bg-surface px-3 py-2.5 text-sm text-muted hover:bg-surface-hover disabled:opacity-50"
       >
         <ImagePlus size={16} />
-        {uploading ? "Uploading…" : url ? "Replace photo" : "Add a photo"}
+        {uploading ? "Enviando…" : url ? "Trocar foto" : "Adicionar foto"}
       </button>
       <input
         ref={inputRef}

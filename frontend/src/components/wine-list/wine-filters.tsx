@@ -34,14 +34,14 @@ export function WineFilters({ q, type, minScore }: WineFiltersProps) {
         <Input
           type="search"
           name="q"
-          placeholder="Search by name or winery…"
+          placeholder="Buscar por nome ou vinícola…"
           defaultValue={q}
           className="pl-9"
         />
       </div>
       <div className="flex gap-2">
         <Select name="type" defaultValue={type ?? ""} className="flex-1" onChange={submitNow}>
-          <option value="">Any type</option>
+          <option value="">Qualquer tipo</option>
           {WINE_TYPES.map((t) => (
             <option key={t} value={t}>
               {t}
@@ -49,10 +49,10 @@ export function WineFilters({ q, type, minScore }: WineFiltersProps) {
           ))}
         </Select>
         <Select name="minScore" defaultValue={minScore ?? ""} className="flex-1" onChange={submitNow}>
-          <option value="">Any score</option>
+          <option value="">Qualquer nota</option>
           {[5, 4, 3, 2, 1].map((n) => (
             <option key={n} value={n}>
-              {n}+ grapes
+              {n}+ cachos
             </option>
           ))}
         </Select>

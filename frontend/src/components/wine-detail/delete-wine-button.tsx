@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 export function DeleteWineButton({ action }: { action: () => Promise<void> }) {
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
-    if (!confirm("Delete this wine? This can't be undone.")) {
+    if (!confirm("Excluir este vinho? Essa ação não pode ser desfeita.")) {
       event.preventDefault();
     }
   }
@@ -15,7 +15,7 @@ export function DeleteWineButton({ action }: { action: () => Promise<void> }) {
     <form action={action} onSubmit={handleSubmit}>
       <Button type="submit" variant="danger" className="w-full">
         <Trash2 size={16} />
-        Delete
+        Excluir
       </Button>
     </form>
   );

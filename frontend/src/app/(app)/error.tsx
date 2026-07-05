@@ -18,11 +18,11 @@ export default function AppError({
   return (
     <div className="flex min-h-dvh flex-col items-center justify-center gap-3 px-6 text-center">
       <WifiOff size={28} className="text-muted" />
-      <h1 className="font-display text-xl text-foreground">Can&apos;t reach the server</h1>
+      <h1 className="font-display text-xl text-foreground">Não foi possível conectar ao servidor</h1>
       <p className="max-w-xs text-sm text-muted">
-        The backend might be waking up or briefly unavailable. Try again in a moment.
+        O backend pode estar inicializando ou momentaneamente indisponível. Tente novamente em instantes.
       </p>
-      <Button onClick={() => unstable_retry()}>Try again</Button>
+      <Button onClick={() => unstable_retry()}>Tentar novamente</Button>
     </div>
   );
 }

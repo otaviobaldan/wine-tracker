@@ -25,11 +25,15 @@ interface WineDetailPageProps {
 }
 
 function formatDate(iso: string): string {
-  return new Date(`${iso}T00:00:00`).toLocaleDateString(undefined, {
+  return new Date(`${iso}T00:00:00`).toLocaleDateString("pt-BR", {
     year: "numeric",
     month: "long",
     day: "numeric",
   });
+}
+
+function formatPrice(price: number): string {
+  return price.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
 
 export default async function WineDetailPage({ params }: WineDetailPageProps) {
@@ -59,48 +63,48 @@ export default async function WineDetailPage({ params }: WineDetailPageProps) {
       </div>
 
       <PropertySheet>
-        <PropertyRow icon={Tag} label="Type">
+        <PropertyRow icon={Tag} label="Tipo">
           {wine.type}
         </PropertyRow>
-        <PropertyRow icon={GrapeIcon} label="Grape">
+        <PropertyRow icon={GrapeIcon} label="Uva">
           {wine.grape}
         </PropertyRow>
-        <PropertyRow icon={MapPin} label="Origin">
+        <PropertyRow icon={MapPin} label="Origem">
           {wine.grapeOrigin}
         </PropertyRow>
-        <PropertyRow icon={WineIcon} label="Where tried">
+        <PropertyRow icon={WineIcon} label="Onde bebemos">
           {wine.whereTried}
           {wine.citySippedIn ? `, ${wine.citySippedIn}` : ""}
         </PropertyRow>
         {wine.whenTried && (
-          <PropertyRow icon={Calendar} label="Date">
+          <PropertyRow icon={Calendar} label="Data">
             {formatDate(wine.whenTried)}
           </PropertyRow>
         )}
-        <PropertyRow icon={StickyNote} label="Notes">
+        <PropertyRow icon={StickyNote} label="Notas">
           <p className="whitespace-pre-wrap">{wine.personalFeels}</p>
         </PropertyRow>
         {wine.notes && (
-          <PropertyRow icon={StickyNote} label="More notes">
+          <PropertyRow icon={StickyNote} label="Mais notas">
             <p className="whitespace-pre-wrap">{wine.notes}</p>
           </PropertyRow>
         )}
         {wine.descriptionByAi && (
-          <PropertyRow icon={Sparkles} label="AI take">
+          <PropertyRow icon={Sparkles} label="IA">
             <p className="whitespace-pre-wrap">{wine.descriptionByAi}</p>
           </PropertyRow>
         )}
         {wine.price != null && (
-          <PropertyRow icon={DollarSign} label="Price">
-            R$ {wine.price.toFixed(2)}
+          <PropertyRow icon={DollarSign} label="Preço">
+            R$ {formatPrice(wine.price)}
           </PropertyRow>
         )}
         {wine.purchaseLocation && (
-          <PropertyRow icon={ShoppingBag} label="Bought at">
+          <PropertyRow icon={ShoppingBag} label="Comprado em">
             {wine.purchaseLocation}
           </PropertyRow>
         )}
-        <PropertyRow icon={User} label="Logged by">
+        <PropertyRow icon={User} label="Registrado por">
           {wine.createdBy}
         </PropertyRow>
       </PropertySheet>
@@ -108,7 +112,7 @@ export default async function WineDetailPage({ params }: WineDetailPageProps) {
       <div className="flex gap-3">
         <Link href={`/wines/${wine.id}/edit`} className="flex-1">
           <Button variant="secondary" className="w-full">
-            Edit
+            Editar
           </Button>
         </Link>
         <div className="flex-1">

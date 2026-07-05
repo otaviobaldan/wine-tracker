@@ -1,7 +1,7 @@
 {
   "name": "Wine Tracker",
   "short_name": "Wine Tracker",
-  "description": "A private log of wines we've enjoyed together.",
+  "description": "Um registro privado dos vinhos que já provamos juntos.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
