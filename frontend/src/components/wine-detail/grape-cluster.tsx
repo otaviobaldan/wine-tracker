@@ -1,13 +1,9 @@
-interface GrapeClusterProps {
-  filled: boolean;
-  size?: number;
+interface GrapeClusterSvgProps {
+  color: string;
+  size: number;
 }
 
-// A small cluster of grapes, drawn as circles so it reads at a glance next to
-// Lucide's stroke-based icons without relying on emoji (renders inconsistently
-// across OSes).
-export function GrapeCluster({ filled, size = 16 }: GrapeClusterProps) {
-  const color = filled ? "var(--color-accent)" : "var(--color-border)";
+function GrapeClusterSvg({ color, size }: GrapeClusterSvgProps) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true">
       <circle cx="12" cy="4" r="2.4" fill={color} />
@@ -23,6 +19,32 @@ export function GrapeCluster({ filled, size = 16 }: GrapeClusterProps) {
   );
 }
 
+interface GrapeClusterProps {
+  fill: 0 | 0.5 | 1;
+  size?: number;
+}
+
+// A small cluster of grapes, drawn as circles so it reads at a glance next to
+// Lucide's stroke-based icons without relying on emoji (renders inconsistently
+// across OSes). Half-fill is done with a CSS clip-path (not an SVG <clipPath>
+// element, which would need a page-unique id — this renders many times per
+// page in list/grid views) overlaying a filled copy on the empty one.
+export function GrapeCluster({ fill, size = 16 }: GrapeClusterProps) {
+  return (
+    <span className="relative inline-block" style={{ width: size, height: size }}>
+      <GrapeClusterSvg color="var(--color-border)" size={size} />
+      {fill > 0 && (
+        <span
+          className="absolute inset-0"
+          style={fill === 0.5 ? { clipPath: "inset(0 50% 0 0)" } : undefined}
+        >
+          <GrapeClusterSvg color="var(--color-accent)" size={size} />
+        </span>
+      )}
+    </span>
+  );
+}
+
 interface ScoreDisplayProps {
   score: number;
   size?: number;
@@ -31,9 +53,10 @@ interface ScoreDisplayProps {
 export function ScoreDisplay({ score, size = 16 }: ScoreDisplayProps) {
   return (
     <div className="flex items-center gap-1" role="img" aria-label={`Nota: ${score} de 5`}>
-      {[1, 2, 3, 4, 5].map((n) => (
-        <GrapeCluster key={n} filled={n <= score} size={size} />
-      ))}
+      {[1, 2, 3, 4, 5].map((n) => {
+        const fill = score >= n ? 1 : score >= n - 0.5 ? 0.5 : 0;
+        return <GrapeCluster key={n} fill={fill} size={size} />;
+      })}
     </div>
   );
 }

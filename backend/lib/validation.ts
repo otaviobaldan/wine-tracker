@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const wineTypes = ["Tinto", "Branco", "Rosé", "Espumante", "Outro"] as const;
+export const wineTypes = ["Tinto", "Branco", "Rosé", "Laranja", "Espumante", "Outro"] as const;
 
 const winePayloadShape = {
   name: z.string().trim().min(1),
@@ -12,7 +12,7 @@ const winePayloadShape = {
   whereTried: z.string().trim().min(1),
   citySippedIn: z.string().trim().nullable().optional(),
   whenTried: z.string().date().nullable().optional(),
-  score: z.number().int().min(1).max(5),
+  score: z.number().min(0.5).max(5).multipleOf(0.5),
   personalFeels: z.string().trim().min(1),
   notes: z.string().nullable().optional(),
   descriptionByAi: z.string().nullable().optional(),

@@ -5,14 +5,17 @@ import { backendFetch } from "@/lib/api-client";
 import type { Wine } from "@/lib/types";
 import { WineFilters } from "@/components/wine-list/wine-filters";
 import { WineListItem } from "@/components/wine-list/wine-list-item";
+import { WineGridItem } from "@/components/wine-list/wine-grid-item";
+import { ViewToggle } from "@/components/wine-list/view-toggle";
 
 interface WineListPageProps {
-  searchParams: Promise<{ q?: string; type?: string; minScore?: string }>;
+  searchParams: Promise<{ q?: string; type?: string; minScore?: string; view?: string }>;
 }
 
 export default async function WineListPage({ searchParams }: WineListPageProps) {
   const { token } = await requireSession();
-  const { q, type, minScore } = await searchParams;
+  const { q, type, minScore, view: rawView } = await searchParams;
+  const view = rawView === "grid" ? "grid" : "list";
 
   const params = new URLSearchParams();
   if (q) params.set("q", q);
@@ -26,7 +29,12 @@ export default async function WineListPage({ searchParams }: WineListPageProps) 
 
   return (
     <div>
-      <WineFilters q={q} type={type} minScore={minScore} />
+      <div className="mb-4 flex items-start gap-3">
+        <div className="flex-1">
+          <WineFilters q={q} type={type} minScore={minScore} />
+        </div>
+        <ViewToggle view={view} preservedParams={{ q, type, minScore }} />
+      </div>
 
       {wines.length === 0 ? (
         <p className="py-12 text-center text-sm text-muted">
@@ -34,6 +42,12 @@ export default async function WineListPage({ searchParams }: WineListPageProps) 
             ? "Nenhum vinho corresponde a esses filtros."
             : "Nenhum vinho registrado ainda."}
         </p>
+      ) : view === "grid" ? (
+        <div className="grid grid-cols-2 gap-3">
+          {wines.map((wine) => (
+            <WineGridItem key={wine.id} wine={wine} />
+          ))}
+        </div>
       ) : (
         <ul className="space-y-2">
           {wines.map((wine) => (

@@ -1,4 +1,4 @@
-export const WINE_TYPES = ["Tinto", "Branco", "Rosé", "Espumante", "Outro"] as const;
+export const WINE_TYPES = ["Tinto", "Branco", "Rosé", "Laranja", "Espumante", "Outro"] as const;
 export type WineType = (typeof WINE_TYPES)[number];
 
 export interface Wine {

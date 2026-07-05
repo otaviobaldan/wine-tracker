@@ -33,7 +33,7 @@ export const wines = pgTable(
     whereTried: text("where_tried").notNull(),
     citySippedIn: text("city_sipped_in"),
     whenTried: date("when_tried"),
-    score: integer("score").notNull(),
+    score: numeric("score", { precision: 2, scale: 1, mode: "number" }).notNull(),
     personalFeels: text("personal_feels").notNull(),
     notes: text("notes"),
     descriptionByAi: text("description_by_ai"),
@@ -45,7 +45,12 @@ export const wines = pgTable(
       .defaultNow()
       .notNull(),
   },
-  (table) => [check("score_range", sql`${table.score} BETWEEN 1 AND 5`)],
+  (table) => [
+    check(
+      "score_range",
+      sql`${table.score} BETWEEN 0.5 AND 5 AND ${table.score} = ROUND(${table.score} * 2) / 2`,
+    ),
+  ],
 );
 
 export type User = typeof users.$inferSelect;
