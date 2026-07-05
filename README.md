@@ -22,6 +22,36 @@ There is no root `package.json` — each app is run independently (`cd backend` 
 
 See each app's README for local dev instructions, and the root of this repo's deployment notes below.
 
+## Local development
+
+The backend's `npm run dev` runs `vercel dev`, which needs the [Vercel CLI](https://vercel.com/docs/cli) installed and the project linked to your Vercel account (`vercel link`, run once from `backend/`) so it can read the env vars you set in step 1–3 above. Run it in one terminal, then in a second terminal `cd frontend && npm run dev` with `BACKEND_URL=http://localhost:3000` (or whatever port `vercel dev` prints) in `frontend/.env.local`.
+
+## Verifying it works
+
+Once deployed (or running locally) with Neon migrated and the 2 accounts seeded:
+
+**Backend**, replace `$BACKEND_URL` and `$TOKEN` as you go:
+
+```bash
+curl -X POST $BACKEND_URL/api/auth/login -H "Content-Type: application/json" \
+  -d '{"email":"otavio@example.com","password":"..."}'
+# → 200 with { token, user }
+
+curl $BACKEND_URL/api/auth/me -H "Authorization: Bearer $TOKEN"
+# → 200 with the user; omit the header and expect 401
+
+curl -X POST $BACKEND_URL/api/wines -H "Authorization: Bearer $TOKEN" \
+  -H "Content-Type: application/json" -d '{"name":"Raquis","winery":"...","type":"Tinto","grape":"Malbec","grapeOrigin":"Argentina","whereTried":"Home","score":4,"personalFeels":"Great wine"}'
+# → 201 with the created wine
+
+curl $BACKEND_URL/api/wines -H "Authorization: Bearer $TOKEN"
+curl "$BACKEND_URL/api/wines?type=Tinto&minScore=4" -H "Authorization: Bearer $TOKEN"
+```
+
+**Frontend**, in a browser: log in → confirm redirect to the wine list → add a wine (with a photo) → confirm it shows up → search/filter → open its detail view → edit it → delete it → log out → confirm `/` redirects back to `/login`. On a phone, use "Add to Home Screen" (iOS Safari) or the install prompt (Android Chrome) and confirm it opens standalone.
+
+This full authenticated flow needs a real Neon database and can't be exercised in a sandboxed dev environment without one — everything up to this point (schema, migrations, build, typecheck, lint, and the unauthenticated `/login` screen) has been verified directly; run the checklist above once you've completed first-time setup.
+
 ## Deployment
 
 Both projects track this same GitHub repo as separate Vercel projects:
