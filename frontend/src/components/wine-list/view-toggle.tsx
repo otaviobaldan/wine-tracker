@@ -11,7 +11,7 @@ function hrefFor(view: "list" | "grid", preservedParams: Record<string, string |
   for (const [key, value] of Object.entries(preservedParams)) {
     if (value) params.set(key, value);
   }
-  if (view === "grid") params.set("view", "grid");
+  if (view === "list") params.set("view", "list");
   const qs = params.toString();
   return `/${qs ? `?${qs}` : ""}`;
 }

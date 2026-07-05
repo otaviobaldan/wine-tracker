@@ -15,7 +15,7 @@ interface WineListPageProps {
 export default async function WineListPage({ searchParams }: WineListPageProps) {
   const { token } = await requireSession();
   const { q, type, minScore, view: rawView } = await searchParams;
-  const view = rawView === "grid" ? "grid" : "list";
+  const view = rawView === "list" ? "list" : "grid";
 
   const params = new URLSearchParams();
   if (q) params.set("q", q);
