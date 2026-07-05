@@ -1,5 +1,5 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { and, desc, eq, gte, ilike, lte } from "drizzle-orm";
+import { and, desc, eq, gte, ilike, lte, or } from "drizzle-orm";
 import { db } from "../../lib/db.js";
 import { wines } from "../../lib/schema.js";
 import { requireAuth } from "../../lib/middleware.js";
@@ -28,7 +28,7 @@ async function handleList(req: VercelRequest, res: VercelResponse) {
 
   const conditions = [];
   if (q) {
-    conditions.push(ilike(wines.name, `%${q}%`));
+    conditions.push(or(ilike(wines.name, `%${q}%`), ilike(wines.winery, `%${q}%`)));
   }
   if (type) {
     conditions.push(eq(wines.type, type));
