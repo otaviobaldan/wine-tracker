@@ -12,7 +12,7 @@ export function WineGridItem({ wine }: { wine: Wine }) {
       <div className="aspect-square w-full bg-background">
         {wine.bottlePhotoUrl ? (
           // eslint-disable-next-line @next/next/no-img-element -- arbitrary Blob URL
-          <img src={wine.bottlePhotoUrl} alt={wine.name} className="h-full w-full object-cover" />
+          <img src={wine.bottlePhotoUrl} alt={wine.name} className="h-full w-full object-contain" />
         ) : (
           <div className="flex h-full w-full items-center justify-center">
             <WineIcon size={28} className="text-border" />
