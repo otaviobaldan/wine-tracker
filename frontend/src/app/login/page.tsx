@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Wine } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 
@@ -37,7 +38,10 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-dvh items-center justify-center px-4">
       <div className="w-full max-w-sm">
-        <h1 className="mb-1 font-display text-3xl text-foreground">Wine Tracker</h1>
+        <div className="mb-1 flex items-center gap-2">
+          <Wine size={26} className="text-accent" />
+          <h1 className="font-display text-3xl text-foreground">Wine Tracker</h1>
+        </div>
         <p className="mb-8 text-sm text-muted">Entre para ver o que temos bebido.</p>
 
         <form onSubmit={handleSubmit} className="space-y-4">
