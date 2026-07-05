@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, DM_Serif_Display } from "next/font/google";
+import { ServiceWorkerRegistration } from "@/components/service-worker-registration";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -22,6 +23,13 @@ export const metadata: Metadata = {
     statusBarStyle: "black-translucent",
     title: "Wine Tracker",
   },
+  icons: {
+    icon: [
+      { url: "/icons/icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 export const viewport: Viewport = {
@@ -37,7 +45,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${dmSans.variable} ${dmSerif.variable} h-full`}>
-      <body className="min-h-full font-sans antialiased">{children}</body>
+      <body className="min-h-full font-sans antialiased">
+        {children}
+        <ServiceWorkerRegistration />
+      </body>
     </html>
   );
 }
