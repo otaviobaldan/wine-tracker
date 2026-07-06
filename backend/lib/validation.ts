@@ -12,6 +12,7 @@ const winePayloadShape = {
   whereTried: z.string().trim().min(1),
   citySippedIn: z.string().trim().nullable().optional(),
   whenTried: z.string().date().nullable().optional(),
+  companions: z.array(z.string().trim().min(1)).optional(),
   score: z.number().min(0.5).max(5).multipleOf(0.5),
   personalFeels: z.string().trim().min(1),
   notes: z.string().nullable().optional(),

@@ -1,0 +1,1 @@
+ALTER TABLE "wines" ADD COLUMN "companions" text[];

@@ -25,6 +25,17 @@ function nullableNumber(formData: FormData, name: string): number | null {
   return value === "" ? null : Number(value);
 }
 
+function stringArray(formData: FormData, name: string): string[] {
+  const raw = str(formData, name);
+  if (!raw) return [];
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed.filter((v): v is string => typeof v === "string") : [];
+  } catch {
+    return [];
+  }
+}
+
 function parseWineFormData(formData: FormData): WineInput {
   return {
     name: str(formData, "name"),
@@ -36,6 +47,7 @@ function parseWineFormData(formData: FormData): WineInput {
     whereTried: str(formData, "whereTried"),
     citySippedIn: nullableStr(formData, "citySippedIn"),
     whenTried: nullableStr(formData, "whenTried"),
+    companions: stringArray(formData, "companions"),
     score: Number(str(formData, "score")),
     personalFeels: str(formData, "personalFeels"),
     notes: nullableStr(formData, "notes"),

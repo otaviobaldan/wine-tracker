@@ -12,6 +12,7 @@ export interface Wine {
   whereTried: string;
   citySippedIn: string | null;
   whenTried: string | null;
+  companions: string[] | null;
   score: number;
   personalFeels: string;
   notes: string | null;
@@ -28,5 +29,10 @@ export type WineInput = Omit<Wine, "id" | "createdBy" | "createdAt">;
 export interface SessionUser {
   id: string;
   email: string;
+  displayName: string;
+}
+
+export interface RegisteredUser {
+  id: string;
   displayName: string;
 }

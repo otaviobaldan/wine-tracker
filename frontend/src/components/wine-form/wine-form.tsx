@@ -5,12 +5,14 @@ import { Input, Label, Select, Textarea } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ScorePicker } from "./score-picker";
 import { PhotoUpload } from "./photo-upload";
-import { WINE_TYPES, type Wine } from "@/lib/types";
+import { CompanionsPicker } from "./companions-picker";
+import { WINE_TYPES, type RegisteredUser, type Wine } from "@/lib/types";
 import type { WineFormState } from "@/app/(app)/wines/actions";
 
 interface WineFormProps {
   action: (state: WineFormState, formData: FormData) => Promise<WineFormState>;
   initialValues?: Wine;
+  registeredUsers: RegisteredUser[];
   submitLabel: string;
 }
 
@@ -19,7 +21,7 @@ function FieldError({ messages }: { messages?: string[] }) {
   return <p className="mt-1 text-xs text-accent">{messages.join(", ")}</p>;
 }
 
-export function WineForm({ action, initialValues, submitLabel }: WineFormProps) {
+export function WineForm({ action, initialValues, registeredUsers, submitLabel }: WineFormProps) {
   const [state, formAction, pending] = useActionState<WineFormState, FormData>(action, {});
   const errors = state.fieldErrors ?? {};
 
@@ -127,6 +129,15 @@ export function WineForm({ action, initialValues, submitLabel }: WineFormProps) 
             defaultValue={initialValues?.whenTried ?? undefined}
           />
           <FieldError messages={errors.whenTried} />
+        </div>
+        <div>
+          <Label>Com quem você bebeu</Label>
+          <CompanionsPicker
+            name="companions"
+            registeredUsers={registeredUsers}
+            defaultValue={initialValues?.companions ?? []}
+          />
+          <FieldError messages={errors.companions} />
         </div>
         <div>
           <Label htmlFor="personalFeels">Notas pessoais</Label>

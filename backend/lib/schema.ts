@@ -33,6 +33,7 @@ export const wines = pgTable(
     whereTried: text("where_tried").notNull(),
     citySippedIn: text("city_sipped_in"),
     whenTried: date("when_tried"),
+    companions: text("companions").array(),
     score: numeric("score", { precision: 2, scale: 1, mode: "number" }).notNull(),
     personalFeels: text("personal_feels").notNull(),
     notes: text("notes"),

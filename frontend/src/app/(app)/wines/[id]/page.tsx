@@ -9,6 +9,7 @@ import {
   StickyNote,
   Tag,
   User,
+  Users,
   Wine as WineIcon,
 } from "lucide-react";
 import { requireSession } from "@/lib/session";
@@ -79,6 +80,11 @@ export default async function WineDetailPage({ params }: WineDetailPageProps) {
         {wine.whenTried && (
           <PropertyRow icon={Calendar} label="Data">
             {formatDate(wine.whenTried)}
+          </PropertyRow>
+        )}
+        {wine.companions && wine.companions.length > 0 && (
+          <PropertyRow icon={Users} label="Com quem">
+            {wine.companions.join(", ")}
           </PropertyRow>
         )}
         <PropertyRow icon={StickyNote} label="Notas">

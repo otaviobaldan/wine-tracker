@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { requireSession } from "@/lib/session";
 import { ApiError, backendFetch } from "@/lib/api-client";
-import type { Wine } from "@/lib/types";
+import type { RegisteredUser, Wine } from "@/lib/types";
 import { WineForm } from "@/components/wine-form/wine-form";
 import { updateWineAction } from "../../actions";
 
@@ -21,12 +21,15 @@ export default async function EditWinePage({ params }: EditWinePageProps) {
     throw err;
   }
 
+  const { users } = await backendFetch<{ users: RegisteredUser[] }>("/api/users", { token });
+
   return (
     <div>
       <h1 className="mb-6 font-display text-2xl text-foreground">Editar vinho</h1>
       <WineForm
         action={updateWineAction.bind(null, id)}
         initialValues={wine}
+        registeredUsers={users}
         submitLabel="Salvar alterações"
       />
     </div>
