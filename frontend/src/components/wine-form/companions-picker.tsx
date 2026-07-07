@@ -97,6 +97,7 @@ export function CompanionsPicker({ name, registeredUsers, defaultValue = [] }: C
             <button
               key={u.id}
               type="button"
+              onMouseDown={(e) => e.preventDefault()}
               onClick={() => add(u.displayName)}
               className="block w-full px-3 py-2 text-left text-sm text-foreground hover:bg-surface-hover"
             >
@@ -106,6 +107,7 @@ export function CompanionsPicker({ name, registeredUsers, defaultValue = [] }: C
           {canAddFreeText && (
             <button
               type="button"
+              onMouseDown={(e) => e.preventDefault()}
               onClick={() => add(trimmedQuery)}
               className="flex w-full items-center gap-2 px-3 py-2 text-left text-sm text-accent hover:bg-surface-hover"
             >
